@@ -10,12 +10,38 @@
 
 <body>
 
-    <td id="box5" onclick="move(5)"></td>
-    <button id=""> </button>
+    <div class = "layout" >
+        $<span class = "layout" id ="bank"> 1000 </span><br>
+        <div class = "layout" id = "notification">  Notification</div><br> 
+    </div>
 
+    <div class = "dice-box">
+        <button class="dice-box" id="reset" onclick="reset()">RESET</button><br>
+        <button class = "dice-box" id = "dice-roll" onclick = "diceRoll()" disabled>ROLL DICE</button>
+        <br>
+        Dice Roll ----> [ <span id="dice-roll1-amount"> -- </span> ] [ <span id="dice-roll2-amount"> -- </span> ]
+        <br>
+        Dice Roll Total = <span id="dice-roll-total"> [--] </span>
+        <br>
+        <br>
+    </div>
 
+    <div class = "table-area">
+        <button class = "table-area" id="pass-line" onclick ="betHowMuch()" >Pass Line</button>
+        Bet Amount $<span id="pass-bet-amount">0 </span>
+        <br><br>
+        <button class = "table-area" id="pass-odds">Pass Odss</button><br><br>
 
+        <button class = "table-area" id="bet4">Bet 4</button><br><br>
+        <button class = "table-area" id="bet5">Bet 5</button><br><br>
+        <button class = "table-area" id="bet6">Bet 6</button><br><br>
+        <button class = "table-area" id="bet7">Bet 7</button><br><br>
+        <button class = "table-area" id="bet8">Bet 8</button><br><br>
+        <button class = "table-area" id="bet9">Bet 9</button><br><br>
+        <button class = "table-area" id="bet10">Bet 10</button><br><br>
+    </div>
 
+    
 
 
 
