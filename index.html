@@ -13,48 +13,69 @@
     
     <!-- top bar notification, bank, and bet, grid container 00 -->
     <!-- CSS NOTES - should lay flat above table - and go across the page -->
-    <div class="grid-container-0" class="top-bar">
+
+    <!-- temporary disabled to work on drag and drop -->
+    <!-- temporary disabled to work on drag and drop -->
+    <!-- temporary disabled to work on drag and drop -->
+    <!-- temporary disabled to work on drag and drop -->
+
+    <!-- <div class="grid-container-0" class="top-bar">
         <div class="grid-item-0" id="bank-roll"> Bank: $1,000,000.00</div>
         <div class="grid-item-0" id="field-bet-amount"> Field Bet Amount </div>
         <div class="grid-item-0" id="notification"> Notification</div>
-    </div>
+    </div> -->
+
+
+
 
     <!-- grid container 1 , this is the table area, main bets here -->
     <!-- CSS NOTES -- take table dimension from vegas craps game website -->
-    <div class="grid-container" class="table-area">
-        <div class="grid-item" id="grid-item-puck" class="table-area" id="puck-bar">Puck</div>
+    <div class="grid-container droppable-elements">
+        <div class="grid-item droppable" id="puck-bar">Puck</div>
 
-        <div class="grid-item" id="grid-item-dcb" class="table-area" id="dont-come-bar">Don't Come Bar </div>
-        <div class="grid-item" id="grid-item-4" class="table-area" id="bet-4">Bet 4</div>
-        <div class="grid-item" id="grid-item-5" class="table-area" id="bet-5">Bet 5</div>
-        <div class="grid-item" id="grid-item-6" class="table-area" id="bet-6">Bet 6</div>
-        <div class="grid-item" id="grid-item-8" class="table-area" id="bet-8">Bet 8</div>
-        <div class="grid-item" id="grid-item-9" class="table-area" id="bet-9">Bet 9</div>
-        <div class="grid-item" id="grid-item-10" class="table-area" id="bet-10">Bet 10</div>
+        <div class="grid-item droppable" id="dont-come-bar"> Don't Come Bar </div>
+        <div class="grid-item droppable" id="bet-4">Bet 4</div>
+        <div class="grid-item droppable" id="bet-5">Bet 5</div>
+        <div class="grid-item droppable" id="bet-6">Bet 6</div>
+        <div class="grid-item droppable" id="bet-8">Bet 8</div>
+        <div class="grid-item droppable" id="bet-9">Bet 9</div>
+        <div class="grid-item droppable" id="bet-10">Bet 10</div>
 
-        <div class="grid-item" id="grid-item-bet-row" class="table-area" id="place-bets">place bets</div>
+        <div class="grid-item droppable" id="place-bets">place bets</div>
 
-        <div class="grid-item" id="grid-item-cl" class="table-area" id="come-line">Come Line</div>
-        <div class="grid-item" id="grid-item-fl" class="table-area" id="field-line">Field Line</div>
-        <div class="grid-item" id="grid-item-pl" class="table-area" id="pass-line" onclick ="betHowMuch()">Pass Line. Bet Amount $<span id="pass-bet-amount">0 </span></div>
-        <div class="grid-item" id="grid-item-ol" class="table-area" id="odds-line">Odd Line</div>
+        <div class="grid-item droppable" id="come-line">Come Line</div>
+        <div class="grid-item droppable" id="field-line">Field Line</div>
+        <div class="grid-item droppable" id="pass-line" onclick ="betHowMuch()">Pass Line. Bet Amount $<span id="pass-bet-amount">0 </span></div>
+        <div class="grid-item droppable" id="odds-line">Odd Line</div>
     </div>
 
     <!-- grid container 2, this is your chips, the rack area with chips -->
     <!-- CSS NOTES - move to the left as a column next to the main table area -->
-    <div class="grid-container-2" class="rack">
-        <div class="grid-item-2" id="chip-1" class="rack"> $1 </div>
-        <div class="grid-item-2" id="chip-5" class="rack"> $5 </div>
-        <div class="grid-item-2" id="chip-25" class="rack"> $25 </div>
-        <div class="grid-item-2" id="chip-100" class="rack"> $100 </div>
-        <div class="grid-item-2" id="place-drink" class="rack"> My Beverage Place Holder</div>
+    <div class="grid-container-2 draggable-elements" >
+        <div class="grid-item-2 draggable" id="chip-1"> $1 </div>
+        <div class="grid-item-2 draggable" id="chip-5"> $5 </div>
+        <div class="grid-item-2 draggable" id="chip-25"> $25 </div>
+        <div class="grid-item-2 draggable" id="chip-100"> $100 </div>
+        <div class="grid-item-2 draggable" id="place-drink"> My Beverage Place Holder</div>
     </div>
     
-    Dice Roll Total = <span id="dice-roll-total"> [--] </span>
+    <!-- temporary disabled to work on drag and drop -->
+    <!-- temporary disabled to work on drag and drop -->
+    <!-- temporary disabled to work on drag and drop -->
+    <!-- temporary disabled to work on drag and drop -->
+<!-- 
+    Dice Roll Total = <span id="dice-roll-total"> [--] </span> -->
+
+
+    <!-- temporary disabled to work on drag and drop -->
+    <!-- temporary disabled to work on drag and drop -->
+    <!-- temporary disabled to work on drag and drop -->
+    <!-- temporary disabled to work on drag and drop -->
+
 
     <!-- calling this grid container 3, and table area 2 - one time bets and side car bets -->
     <!-- CSS NOTES -- move this to the bottom right, float, bottom right of main table -->
-    <div class="grid-container-3" class="table-area-2">
+    <!-- <div class="grid-container-3" class="table-area-2">
         <div class="grid-item-3" id="side-sevens" class="table-area-2" >Seven 4 to 1</div>
 
         <div class="grid-item-3" id="double-twos" class="table-area-2">2 + 2 --- 7 to 1</div>
@@ -66,21 +87,21 @@
         <div class="grid-item-3" id="side-eleven" class="table-area-2">5 + 6 --- 15 to 1</div>
         <div class="grid-item-3" id="side-twos" class="table-area-2">1 + 1 --- 30 to 1</div>
         <div class="grid-item-3" id="side-cars" class="table-area-2">6 + 6 --- 30 to 1</div>
-    </div>
+    </div> -->
 
     <!-- Dice = dice box, grid container 4,  -->
     <!-- CSS NOTES ---- move to the top right, next to main field, above one time bets, float -->
-    <div class="grid-container-4" class="dice-box">
+    <!-- <div class="grid-container-4" class="dice-box">
         <div class="grid-item-4" id="dice-1">
-            Dice Roll --> [ <span id="dice-roll1-amount"> -- </span> ] 
+            Dice Roll ... [ <span id="dice-roll1-amount"> -- </span> ] 
         </div>
         <div class="grid-item-4" id="dice-2">
-            Dice Roll --> [ <span id="dice-roll2-amount"> -- </span> ]
+            Dice Roll ...  [ <span id="dice-roll2-amount"> -- </span> ]
         </div>
         <div class="grid-item-4" id="roll-button">
             <button class="dice-box" id = "dice-roll" onclick = "diceRoll()" disabled>ROLL DICE</button>
         </div>
-    </div>
+    </div> -->
 
 
     
