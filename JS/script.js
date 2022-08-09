@@ -1,24 +1,48 @@
 // DOMS...
 // let passLine = document.getElementById("pass-line");
 // passLine.addEventListener("click", bet);
+// const draggableElements = document.querySelectorAll(".draggable");
+// const droppableElements = document.querySelectorAll(".droppoable");
+
+
+var chip1 = document.getElementById("chip-1");
+
+function drag(event) {
+    console.log("dragging...");
+    event.dataTransfer.setData("text", event.target.id);
+}
+
+function allowDrop(event) {
+    event.preventDefault();
+}
+
+function drop(event) {
+    event.preventDefault();
+    var data = event.dataTransfer.getData("text");
+    event.target.appendChild(document.getElementById(data));
+}
 
 
 // CLASS NOTIFICATION
+// fix this
+// fix this
 let bankText = document.getElementById("bank");
 let notification = document.getElementById("notification");
 
 
 
 // CLASS  "DICE-BOX"
+// fix this
+// fix this
 let diceRollText1 = document.getElementById("dice-roll1-amount");
 let diceRollText2 = document.getElementById("dice-roll2-amount");
 let diceRollTotal = document.getElementById("dice-roll-total");
 let diceButton = document.getElementById("dice-roll");
 
 // CLASS "TABLE AREA"
+// fix this
+// fix this
 let passBetText = document.getElementById("pass-bet-amount");
-
-
 
 
 

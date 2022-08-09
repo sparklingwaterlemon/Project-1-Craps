@@ -30,34 +30,47 @@
 
     <!-- grid container 1 , this is the table area, main bets here -->
     <!-- CSS NOTES -- take table dimension from vegas craps game website -->
-    <div class="grid-container droppable-elements">
+    <!-- <div class="grid-container droppable-elements">
         <div class="grid-item droppable" id="puck-bar">Puck</div>
 
         <div class="grid-item droppable" id="dont-come-bar"> Don't Come Bar </div>
-        <div class="grid-item droppable" id="bet-4">Bet 4</div>
-        <div class="grid-item droppable" id="bet-5">Bet 5</div>
-        <div class="grid-item droppable" id="bet-6">Bet 6</div>
-        <div class="grid-item droppable" id="bet-8">Bet 8</div>
-        <div class="grid-item droppable" id="bet-9">Bet 9</div>
-        <div class="grid-item droppable" id="bet-10">Bet 10</div>
+        <div class="grid-item droppable" id="bet-4" ondrop="drop(event)" ondragover="dragOver(event)">Bet 4</div>
+        <div class="grid-item droppable" id="bet-5" ondrop="drop(event)" ondragover="dragOver(event)">Bet 5</div>
+        <div class="grid-item droppable" id="bet-6" ondrop="drop(event)" ondragover="dragOver(event)">Bet 6</div>
+        <div class="grid-item droppable" id="bet-8" ondrop="drop(event)" ondragover="dragOver(event)">Bet 8</div>
+        <div class="grid-item droppable" id="bet-9" ondrop="drop(event)" ondragover="dragOver(event)">Bet 9</div>
+        <div class="grid-item droppable" id="bet-10" ondrop="drop(event)" ondragover="dragOver(event)">Bet 10</div>
 
-        <div class="grid-item droppable" id="place-bets">place bets</div>
+        <div class="grid-item droppable" id="place-bets" ondrop="drop(event)" ondragover="Over(event)">place bets</div>
 
-        <div class="grid-item droppable" id="come-line">Come Line</div>
-        <div class="grid-item droppable" id="field-line">Field Line</div>
-        <div class="grid-item droppable" id="pass-line" onclick ="betHowMuch()">Pass Line. Bet Amount $<span id="pass-bet-amount">0 </span></div>
-        <div class="grid-item droppable" id="odds-line">Odd Line</div>
-    </div>
+        <div class="grid-item droppable" id="come-line" ondrop="drop(event)" ondragover="dragOver(event)">Come Line</div>
+        <div class="grid-item droppable" id="field-line" ondrop="drop(event)" ondragover="dragOver(event)">Field Line</div>
+        <div class="grid-item droppable" id="pass-line"  ondrop="drop(event)" ondragover="dragOver(event)">Pass Line. Bet Amount $<span id="pass-bet-amount">0 </span></div>
+
+
+
+
+        <div class="grid-item droppable" id="odds-line"  ondrop="drop(event)" ondragover="allowDrop(event)">Odd Line</div>
+    </div> -->
+    <div id="chip-testing" draggable="true" ondragstart="drag(event)"> $1 </div>
+
+
+    
+
+    <div id="animals" ondrop="drop(event)" ondragover="allowDrop(event)"> TESTING</div>
+   
+
+
 
     <!-- grid container 2, this is your chips, the rack area with chips -->
     <!-- CSS NOTES - move to the left as a column next to the main table area -->
-    <div class="grid-container-2 draggable-elements" >
-        <div class="grid-item-2 draggable" id="chip-1"> $1 </div>
-        <div class="grid-item-2 draggable" id="chip-5"> $5 </div>
-        <div class="grid-item-2 draggable" id="chip-25"> $25 </div>
-        <div class="grid-item-2 draggable" id="chip-100"> $100 </div>
-        <div class="grid-item-2 draggable" id="place-drink"> My Beverage Place Holder</div>
-    </div>
+    <!-- <div class="grid-container-2 draggable-elements" >
+        <div class="grid-item-2 draggable" id="chip-1" draggable="true" ondragstart="dragStart(event)" value="1"> $1 </div>
+        <div class="grid-item-2 draggable" id="chip-5" draggable="true" ondragstart="dragStart(event)"> $5 </div>
+        <div class="grid-item-2 draggable" id="chip-25" draggable="true" ondragstart="dragStart(event)"> $25 </div>
+        <div class="grid-item-2 draggable" id="chip-100" draggable="true" ondragstart="dragStart(event)"> $100 </div>
+        <div class="grid-item-2 draggable" id="place-drink" draggable="true" ondragstart="dragStart(event)"> My Beverage Place Holder</div>
+    </div> -->
     
     <!-- temporary disabled to work on drag and drop -->
     <!-- temporary disabled to work on drag and drop -->
