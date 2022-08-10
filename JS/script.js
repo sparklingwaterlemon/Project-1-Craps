@@ -18,7 +18,8 @@ function drop(event) {
     // Updating Status Bar
     currentBet = currentBet + chipValue;
     betAmountDisplay.innerText = currentBet;
-    bankAmountDisplay.innerText = bank - currentBet;
+    bank = bank - currentBet
+    bankAmountDisplay.innerText = bank;
 
     // Assigning correct value to the correct square you placed your chip at
     // ie if you drop chip on bet square 4 -> increase bet square 4 bet value
@@ -70,12 +71,16 @@ function canYouRoll(){
 };
 
 
-
-
-
 // RESET!! Clears Board!!!
 // RESET!! Clears Board!!!
 function clearboard(){
+
+    // Resets Status Bar
+    notification.innerText = "Notification";
+    betAmountDisplay.innerText = "0";
+    bankAmountDisplay.innerText = bank + currentBet;
+
+    
     // clears table of chips
     console.log("clear");
     placeBets.replaceChildren("Place Bets");
@@ -87,14 +92,17 @@ function clearboard(){
     bet10.replaceChildren("10");
     comeLine.replaceChildren("Come Line");
     fieldLine.replaceChildren("Field Line");
-    passLine.replaceChildren("Padfdafd");
+    passLine.replaceChildren("Pass Line");
     // Able to pass htmls with .innerHTML
-    passLine.innerHTML = `Pass Line Bet Amount $<span id="pass-bet-amount">0 </span>`;
+    // passLine.innerHTML = `Pass Line Bet Amount $<span id="pass-bet-amount">0 </span>`;
     oddsLine.replaceChildren("Odds Line");
     
     // Resets Roll Value
     comeOutRoll = 0;
     pointRoll = 0;
+
+    // Resets Bank Value
+    bank = 1000;
 
     // Resets Bet Amounts to 0
     num4BetAmount = 0;
@@ -109,17 +117,15 @@ function clearboard(){
     passLineBetAmount = 0;
     oddsLineBetAmount = 0;
 
+    // Resets Current Bet to 0
+    currentBet = 0;
+
     // Resets Dice Results
     diceRollText1.innerText = " --"; // reset dice roll values to --
     diceRollText2.innerText = " --";
-    diceRollTotal.innerText = "--";
+    diceRollTotalText.innerText = "--";
     // Disables Dice Roll unless there is a Pass Bet
     diceButton.disabled = true;
-    
-    // Resets Status Bar
-    notification.innerText = "Notification";
-    bankAmountDisplay.innerText = "0";
-    bankAmountDisplay.innerText = bank;
 }
   
 
@@ -141,7 +147,7 @@ const oddsLine = document.getElementById("odds-line");
 // DOMs for DICE BOX
 const diceRollText1 = document.getElementById("dice-roll-1-amount");
 const diceRollText2 = document.getElementById("dice-roll-2-amount");
-const diceRollTotal = document.getElementById("dice-roll-total");
+const diceRollTotalText = document.getElementById("dice-roll-total");
 const diceButton = document.getElementById("roll-button");
 
 // DOMs for Notifications
@@ -166,7 +172,9 @@ let pointRoll = 0;
 // let bigRed = 0; // probably need later on to 7 out
 // let establishedPointNumber = 0; // for point Roll
 
+
 // Constants - Bet Constants
+// Bet Constants are updated from Drop Functions - see above
 let num4BetAmount = 0;
 let num5BetAmount = 0;
 let num6BetAmount = 0;
@@ -182,19 +190,36 @@ let oddsLineBetAmount = 0;
 let totalBetAmount = num4BetAmount + num5BetAmount + num6BetAmount + num8BetAmount + 
 num9BetAmount + num10BetAmount + comeLineBetAmount + fieldLineBetAmount + passLineBetAmount + oddsLineBetAmount;
 
+
 // Constants - Betting Constants
 let currentBet = 0;
 
 // Constants - Win Constants
-let num4win = Math.round(num4BetAmount + (num4BetAmount * 1.8)) // Payout Odds 9:5 - 1.8
-let num5win = Math.round(num5BetAmount + (num5BetAmount * 1.4)) // Payout Odds 7:5 - 1.4
-let num6win = Math.round(num6BetAmount + (num6BetAmount * 1.167)) // Payout Odds 7:6 - 1.167
+let num4win = 0;
+let num5win = 0;
+let num6win = 0;
 
-let num8win = Math.round(num8BetAmount + (num8BetAmount * 1.167)) // Payout Odds 7:6 - 1.167
-let num9win = Math.round(num9BetAmount + (num9BetAmount * 1.4)) // Payout Odds 7:5 - 1.4
-let num10win = Math.round(num10BetAmount + (num10BetAmount * 1.8)) // Payout Odds 9:5 - 1.8
+let num8win = 0;
+let num9win = 0;
+let num10win = 0;
 
-let passLineWin = passLineBetAmount + passLineBetAmount // Payout Odds 1:1 - 1.0
+let passLineWin = 0;
+let totalWinAmount = 0;
+
+// Updating Win Constants =
+function calculateWin(){
+    num4win = Math.round((num4BetAmount * 1.8)) // Payout Odds 9:5 - 1.8
+    num5win = Math.round((num5BetAmount * 1.4)) // Payout Odds 7:5 - 1.4
+    num6win = Math.round((num6BetAmount * 1.167)) // Payout Odds 7:6 - 1.167
+
+    num8win = Math.round((num8BetAmount * 1.167)) // Payout Odds 7:6 - 1.167
+    num9win = Math.round((num9BetAmount * 1.4)) // Payout Odds 7:5 - 1.4
+    num10win = Math.round((num10BetAmount * 1.8)) // Payout Odds 9:5 - 1.8
+
+    passLineWin = passLineBetAmount // Payout Odds 1:1 - 1.0
+    totalWinAmount = num4win + num5win + num6win + num8win + num9win + num10win + passLineWin;
+//  add these to total win amount = + comeLineWin + fieldLineWin + oddLineWin
+};
 
 // let fieldLineWin = 
 // fieldLineBetAmount
@@ -227,8 +252,6 @@ let passLineWin = passLineBetAmount + passLineBetAmount // Payout Odds 1:1 - 1.0
 // if winning number is 4 or 10
 //     return comesdline + comesdline * 2 //payout 2:1
 
-let totalWinAmount = num4win + num5win + num6win + num8win + num9win + num10win + passLineWin;
-//  add these to total win amount = + comeLineWin + fieldLineWin + oddLineWin
 
 
 
@@ -238,11 +261,7 @@ let totalWinAmount = num4win + num5win + num6win + num8win + num9win + num10win 
 
 
 
-
-
-// Functions...
-
-
+// Game Play Functions...
 // Initialized from html - onclick
 function diceRoll(){
     // calculating dice roll value
@@ -253,51 +272,59 @@ function diceRoll(){
     // changing inner text to dice roll results
     diceRollText1.innerText = die1;
     diceRollText2.innerText = die2;
-    diceRollTotal.innerText = diceTotal;
+    diceRollTotalText.innerText = diceTotal;
 
     // calucalting comeOutRoll and pointRoll
     // if it's not come out roll and second turn than =>
-    if(comeOutRoll >= 1){
-        pointRoll += 1;
-        console.log("come out roll " + comeOutRoll);
-        console.log("point roll " + pointRoll);
-    } else {
-        comeOutRoll += 1;
-        console.log("comesooutrolls " + comeOutRoll);
-        comeOutRollResults(diceTotal); // if come out roll (if first turn) => comeOutRollResults
-    }
+    // if(comeOutRoll >= 1){
+    //     pointRoll += 1;
+    //     console.log("come out roll " + comeOutRoll);
+    //     console.log("point roll " + pointRoll);
+    // } else {
+    //     comeOutRoll += 1;
+    //     console.log("comesooutrolls " + comeOutRoll);
+    //     comeOutRollResults(diceTotal); // if come out roll (if first turn) => comeOutRollResults
+    // }
     
+
+    //TESTING
+
+    comeOutRollResults(diceTotal);
 };
 
 function comeOutRollResults(diceTotal){ 
     console.log("diceTotal --- " + diceTotal);
-    if(diceTotal === 7 || diceTotal === 11){ 
-        // won come out roll
-        // going to need to change notification
-        // going to need to change bank value
-        // going to calucalte winning amount
-        // calculate bank amount
-        // going to need to reset
+    if(diceTotal === 7 || diceTotal === 11){
+        calculateWin();
 
+        console.log("total win amount" + totalWinAmount);
+        console.log("bank " + bank);  
         bank = bank + totalWinAmount;
-    
+        console.log("bank+win " + bank);
         notification.innerText = ("You won = " + totalWinAmount);
-        bankText.innerText = bank;
-        setTimeout(reset, 100);
-    } else if(diceTotal === 2 || diceTotal === 3 || diceTotal === 12){
-        // lost come out roll
-        totalBetAmount = passBetAmount;
-        bank = bank - totalBetAmount;
+        diceButton.disabled = true;
 
-        notification.innerText = ("You lost = " + totalBetAmount);
-        bankText.innerText = bank; 
-        setTimeout(reset, 1500);
-    } else {
-        console.log("need to create Point Roll Function PsuedoCode");
-        notification.innerText = ("Point Roll");
-        //function initPointRoll(){}      
+        totalBetAmount = 0;
+        setTimeout(clearboard, 3000);
     }
 }
+        // 
+
+
+//     } else if(diceTotal === 2 || diceTotal === 3 || diceTotal === 12){
+//         // lost come out roll
+//         totalBetAmount = passBetAmount;
+//         bank = bank - totalBetAmount;
+
+//         notification.innerText = ("You lost = " + totalBetAmount);
+//         bankText.innerText = bank; 
+//         setTimeout(reset, 1500);
+//     } else {
+//         console.log("need to create Point Roll Function PsuedoCode");
+//         notification.innerText = ("Point Roll");
+//         //function initPointRoll(){}      
+//     }
+// }
 
 
 
