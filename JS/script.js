@@ -1,4 +1,5 @@
-// DRAG AND DROP FUNCTIONS
+// DRAG AND DROP Functions
+// DRAG AND DROP Functions
 function drag(event, value) {
     event.dataTransfer.setData("number", value);
     event.dataTransfer.setData("text", event.target.id);
@@ -40,6 +41,7 @@ function drop(event) {
     canYouRoll()
     // testBet(); // This is Conole.Logging everything... TO-DOs - change this to notification? so you can see how much you bet on your slot?
 };
+
 // This is Conole.Logging everything...
 function testBet(){
     console.log("num 4 is " + num4BetAmount);
@@ -55,6 +57,7 @@ function testBet(){
     console.log("odds line is " + oddsLineBetAmount);
  
 };
+
 // Allowing Dice Roll Function only if you have a Pass Line Bet
 function canYouRoll(){
     if(comeOutRoll === 0 && passLineBetAmount > 0){
@@ -62,6 +65,11 @@ function canYouRoll(){
     };
 };
 
+
+
+
+
+// RESET!! Clears Board!!!
 // RESET!! Clears Board!!!
 function clearboard(){
     // clears table of chips
@@ -107,6 +115,10 @@ function clearboard(){
 
 
 
+
+
+
+
     //resets notification
     // notification.innerText = "notification"
   
@@ -114,6 +126,11 @@ function clearboard(){
     // passBetText.innerText = "0"; // reset bet amount text to 0
     // bankText.innerText = bank
    
+// CLASS NOTIFICATION
+// fix this
+// fix this
+// let bankText = document.getElementById("bank");
+// let notification = document.getElementById("notification");
 
     
 
@@ -133,45 +150,28 @@ const passLine = document.getElementById("pass-line");
 const oddsLine = document.getElementById("odds-line");
 
 // DOMS for DICE BOX
-let diceRollText1 = document.getElementById("dice-roll1-amount");
-let diceRollText2 = document.getElementById("dice-roll2-amount");
+let diceRollText1 = document.getElementById("dice-roll-1-amount");
+let diceRollText2 = document.getElementById("dice-roll-2-amount");
 let diceRollTotal = document.getElementById("dice-roll-total");
 let diceButton = document.getElementById("roll-button");
 
 
-
-
-
-
-
-
-
-
-
-
-// CLASS NOTIFICATION
-// fix this
-// fix this
-// let bankText = document.getElementById("bank");
-// let notification = document.getElementById("notification");
-
-
-
-
 // Constants...
+// General Game Play
 let bank = 1000;
 let rollOutcome = 0; // whatsa this??
 
+// Constants - Roll Count
 let comeOutRoll = 0;
 let pointRoll = 0;
 // let bigRed = 0; // probably need later on to 7 out
 // let establishedPointNumber = 0; // for point Roll
 
-// Bet Constants...
+// Constants - Bet Constants
 let num4BetAmount = 0;
 let num5BetAmount = 0;
 let num6BetAmount = 0;
-let num7BetAmount = 0;
+
 let num8BetAmount = 0;
 let num9BetAmount = 0;
 let num10BetAmount = 0;
@@ -183,7 +183,55 @@ let oddsLineBetAmount = 0;
 let totalBetAmount = num4BetAmount + num5BetAmount + num6BetAmount + num7BetAmount + num8BetAmount + 
 num9BetAmount + num10BetAmount + comeLineBetAmount + fieldLineBetAmount + passLineBetAmount + oddsLineBetAmount;
 
-// let totalWon
+
+// Constants - Win Constants
+let num4win = Math.round(num4BetAmount + (num4BetAmount * 1.8)) // Payout Odds 9:5 - 1.8
+let num5win = Math.round(num5BetAmount + (num5BetAmount * 1.4)) // Payout Odds 7:5 - 1.4
+let num6win = Math.round(num6BetAmount + (num6BetAmount * 1.167)) // Payout Odds 7:6 - 1.167
+
+let num8win = Math.round(num8BetAmount + (num8BetAmount * 1.167)) // Payout Odds 7:6 - 1.167
+let num9win = Math.round(num9BetAmount + (num9BetAmount * 1.4)) // Payout Odds 7:5 - 1.4
+let num10win = Math.round(num10BetAmount + (num10BetAmount * 1.8)) // Payout Odds 9:5 - 1.8
+
+let passLineWin = passLineBetAmount + passLineBetAmount // Payout Odds 1:1 - 1.0
+
+// let fieldLineWin = 
+// fieldLineBetAmount
+// if(winning number is 3,4,9,10, or 11)
+//     return (fieldLineBetAmount +fieldLineBetAmount);
+// if(winning number is 2)
+//     return fieldLineBetAmount + fieldLineBetAmount * 2
+// if winningnumber is 12
+//     retuen fieldLineBetAmount + fieldLineBetAmount * 3
+
+
+// Odds Line Bet
+// figure this shit out
+// let oddLineWin
+// let oddsLineBetAmount =
+//  if winning number is 5 or 9
+//     let odds1 = take oddsLineBetAmount + oddline* 1.5 //payout odds 3:2
+// if winning number is 6 or 9
+//     let odds1 = take oddline bet + oddline* 0.834 // payout odds 5:6
+// if winning number is 4 or 10
+//     return oddline +oddline *2 //payout 2:1
+
+// comeLineWin
+// let comeLineBetAmount =
+// figure this shit out
+//  if winning number is 5 or 9
+//     return = take comesLineBetAmount + comesLineBetAmount * 1.5 //payout odds 3:2
+// if winning number is 6 or 9
+//     return odds1 = take comesline bet + comesline bet * 0.834 // payout odds 5:6
+// if winning number is 4 or 10
+//     return comesdline + comesdline * 2 //payout 2:1
+
+let totalWinAmount = num4win + num5win + num6win + num8win + num9win + num10win + passLineWin;
+//  add these to total win amount = + comeLineWin + fieldLineWin + oddLineWin
+
+
+
+
 
 
 
@@ -193,9 +241,7 @@ num9BetAmount + num10BetAmount + comeLineBetAmount + fieldLineBetAmount + passLi
 // Functions...
 
 
-
-
-
+// Initialized from html - onclick
 function diceRoll(){
     // calculating dice roll value
 	let die1 = (Math.floor(Math.random()*6)+1);
@@ -214,6 +260,7 @@ function diceRoll(){
     } else {
         // if come out roll (if first turn) => comeOutRollResults
         comeOutRoll += 1;
+        console.log(comeOutRoll);
         comeOutRollResults(diceTotal);
     }
     
@@ -228,11 +275,14 @@ function comeOutRollResults(diceTotal){
         // going to calucalte winning amount
         // calculate bank amount
         // going to need to reset
+
+
+
         passWinAmount = passBetAmount * 2;
         totalWon = passWinAmount;
         bank = bank + totalWon;
     
-        notification.innerText = ("You won = " + totalWon);
+        notification.innerText = ("You won = " + totalWinAmount);
         bankText.innerText = bank;
         setTimeout(reset, 100);
     } else if(diceTotal === 2 || diceTotal === 3 || diceTotal === 12){
