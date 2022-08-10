@@ -11,27 +11,20 @@
 <body>
     <button onclick="clearboard()">RESET </button>
     
-    <!-- top bar notification, bank, and bet, grid container 00 -->
-    <!-- CSS NOTES - should lay flat above table - and go across the page -->
-
-    <!-- temporary disabled to work on drag and drop -->
-    <!-- temporary disabled to work on drag and drop -->
-    <!-- temporary disabled to work on drag and drop -->
-    <!-- temporary disabled to work on drag and drop -->
-
-    <!-- <div class="grid-container-0" class="top-bar">
-        <div class="grid-item-0" id="bank-roll"> Bank: $1,000,000.00</div>
-        <div class="grid-item-0" id="field-bet-amount"> Field Bet Amount </div>
-        <div class="grid-item-0" id="notification"> Notification</div>
-    </div> -->
+    <!-- Notification Bar - Bank Amount Display, Bet Amount Display, Win Amount Display / Notifications -->
+    <!-- Grid Container 0 -->
+    <!-- (CSS) To Fix - Should lay flat above table - go across the page -->
+    <div class="grid-container-0" class="top-bar">
+        <div class="grid-item-0" id="bank-roll-display"> Bank: $1,000.00</div>
+        <div class="grid-item-0" id="bet-amount-display"> Bet Amount Display</div>
+        <div class="grid-item-0" id="notification"> Win-Amount / Notification</div>
+    </div>
 
 
-
-
-    <!-- grid container 1 , this is the table area, main bets here -->
-    <!-- CSS NOTES -- take table dimension from vegas craps game website -->
+    <!-- Table Area / Grid Container 1  -->
+    <!-- (CSS) To Fix - take table dimension from vegas craps game website -->
     <div class="grid-container" id="table-area">
-        <!-- puck bar and don't come bar not betting area so not droppable area -->
+        <!-- Puck Bar and Don't Come Bar are - not betting areas / not droppable area -->
         <div class="grid-item" id="puck-bar">Puck</div>
         <div class="grid-item" id="dont-come-bar"> Don't Come Bar </div>
         <div class="grid-item" id="place-bets" ondrop="drop(event)" ondragover="allowDrop(event)">place bets</div>
@@ -51,8 +44,8 @@
     </div>
 
 
-    <!-- grid container 2, this is your chips, the rack area with chips -->
-    <!-- CSS NOTES - move to the left as a column next to the main table area -->
+    <!-- Rack Area / Grid Container 2 -->
+    <!-- (CSS) To Fix - Left side of page. Standing in a Column. Left of Table Area. Float -->
     <div class="grid-container-2" id="rack">
         <div class="grid-item-2" id="chip-1" draggable="true" ondragstart="drag(event, 1)" value="1"> $1 </div>
         <div class="grid-item-2" id="chip-5" draggable="true" ondragstart="drag(event, 5)" value="5"> $5 </div>
@@ -62,19 +55,16 @@
     </div>
     
 
-    <!-- Dice = dice box, grid container 4,  -->
-    <!-- CSS NOTES ---- move to the top right, next to main field, above one time bets, float -->
+    <!-- Dice Box / Grid Container 4 -->
+    <!-- (CSS) To Fix - Top Right of page. Right of Table Area. Above One Time bet area. Float. -->
     <div class="grid-container-4" class="dice-box">
         <div class="grid-item-4" id="dice-1">
-            Dice Roll ... [ <span id="dice-roll1-amount"> -- </span> ] 
-        </div>
+            <span id="dice-roll1-amount"> Die 1 </span></div>
         <div class="grid-item-4" id="dice-2">
-            Dice Roll ...  [ <span id="dice-roll2-amount"> -- </span> ]
-        </div>
-        <div class="grid-item-4" id="roll-button">
-            <button class="dice-box" id = "dice-roll" onclick = "diceRoll()">ROLL DICE</button>
-        </div>
+            <span id="dice-roll2-amount"> Die 2 </span></div>
+        <button class="grid-item-4 dice-box" id = "roll-button" onclick="diceRoll()" disabled> ROLL DICE </button>
     </div>
+    <div id="dice-roll-total"> -- </div>
 
 
 

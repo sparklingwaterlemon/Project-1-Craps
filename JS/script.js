@@ -2,23 +2,17 @@
 function drag(event, value) {
     event.dataTransfer.setData("number", value);
     event.dataTransfer.setData("text", event.target.id);
-}
-
+};
 function allowDrop(event) {
     event.preventDefault();
-}
-
+};
 function drop(event) {
     event.preventDefault();
-
-    var chipValue = Number(event.dataTransfer.getData("number"));
-
-    console.log(event.target.id);
-    
+    var chipValue = Number(event.dataTransfer.getData("number")); // gets value assigned to chip in HTML
     var data = event.dataTransfer.getData("text");
-    event.target.appendChild(document.getElementById(data).cloneNode(true));
-    // BUG - FIX CLONED ELEMENT DRAG
-    // BUG - ELEMENTS DRAGGED OUTSIDE OF FLEX BOX BORDERS
+    event.target.appendChild(document.getElementById(data).cloneNode(true)); // adds a clone of chip to target
+    // BUG - to fix - cloned elements are able to be dragged & multiple cloned elements may drag at once
+    // BUG - to fix - cloned elements are placed outside of chip box/ betting area
 
     if(event.target.id === "bet-4"){
         num4BetAmount = num4BetAmount + chipValue
@@ -42,25 +36,11 @@ function drop(event) {
         passLineBetAmount = passLineBetAmount + chipValue
     } else if(event.target.id === "odds-line"){
         oddsLineBetAmount = oddsLineBetAmount + chipValue
-    }; 
-
-    testBet();
-}
-
-let num4BetAmount = 0;
-let num5BetAmount = 0;
-let num6BetAmount = 0;
-let num7BetAmount = 0;
-let num8BetAmount = 0;
-let num9BetAmount = 0;
-let num10BetAmount = 0;
-let comeLineBetAmount = 0;
-let fieldLineBetAmount = 0;
-let passLineBetAmount = 0;
-let oddsLineBetAmount = 0;
-
-
-
+    };
+    canYouRoll()
+    // testBet(); // This is Conole.Logging everything... TO-DOs - change this to notification? so you can see how much you bet on your slot?
+};
+// This is Conole.Logging everything...
 function testBet(){
     console.log("num 4 is " + num4BetAmount);
     console.log("num 5 is " + num5BetAmount);
@@ -74,11 +54,15 @@ function testBet(){
     console.log("pass line is " + passLineBetAmount);
     console.log("odds line is " + oddsLineBetAmount);
  
-}
+};
+// Allowing Dice Roll Function only if you have a Pass Line Bet
+function canYouRoll(){
+    if(comeOutRoll === 0 && passLineBetAmount > 0){
+        diceButton.disabled = false;
+    };
+};
 
-
-
-// RESET!! CLEAR BOARD!!
+// RESET!! Clears Board!!!
 function clearboard(){
     // clears table of chips
     console.log("clear");
@@ -92,44 +76,50 @@ function clearboard(){
     comeLine.replaceChildren("Come Line");
     fieldLine.replaceChildren("Field Line");
     passLine.replaceChildren("Padfdafd");
-    // ABLE TO PASS FUNCTIONS AFTER CLEAR WITH INNERHTML
-    // or possibly have a clear board and have a background image with everything
-    passLine.innerHTML = `Bet Amount $<span id="pass-bet-amount">0 </span>`;
+    // Able to pass htmls with .innerHTML
+    passLine.innerHTML = `Pass Line Bet Amount $<span id="pass-bet-amount">0 </span>`;
     oddsLine.replaceChildren("Odds Line");
 
-    // RESETS ROLLS VALUES
+    // Resets Roll Value
     comeOutRoll = 0;
     pointRoll = 0;
 
+    // Resets Bet Amounts to 0
+    num4BetAmount = 0;
+    num5BetAmount = 0;
+    num6BetAmount = 0;
+    num7BetAmount = 0;
+    num8BetAmount = 0;
+    num9BetAmount = 0;
+    num10BetAmount = 0;
+    comeLineBetAmount = 0;
+    fieldLineBetAmount = 0;
+    passLineBetAmount = 0;
+    oddsLineBetAmount = 0;
 
+    // Resets Dice Results
+    diceRollText1.innerText = " --"; // reset dice roll values to --
+    diceRollText2.innerText = " --";
+    diceRollTotal.innerText = "--";
+    // Disables Dice Roll unless there is a Pass Bet
+    diceButton.disabled = true;
+}
 
 
 
     //resets notification
     // notification.innerText = "notification"
-
-
-    //resets dice
-    // diceRollText1.innerText = "--"; // reset dice roll values to --
-    // diceRollText2.innerText = "--";
-    // diceRollTotal.innerText = "--";
-
+  
     // do i need this?
     // passBetText.innerText = "0"; // reset bet amount text to 0
     // bankText.innerText = bank
    
 
-    // //disabling dice button unless there is a passbet
-    // diceButton.disabled = true;
+    
 
-}
 
 // DOMS...
-// previous idea click = bet function... switched over to drag and drop..
-// passLine.addEventListener("click", bet);
-
-
-// DOMS FOR DRAP AND DROP RESET FUNCTIONS
+// DOMS for DRAP and DROP - Reset Function
 const placeBets = document.getElementById("place-bets");
 const bet4 = document.getElementById("bet-4");
 const bet5 = document.getElementById("bet-5");
@@ -142,14 +132,14 @@ const fieldLine = document.getElementById("field-line");
 const passLine = document.getElementById("pass-line");
 const oddsLine = document.getElementById("odds-line");
 
-
-// CLASS  "DICE-BOX"
-// fix this
-// fix this
+// DOMS for DICE BOX
 let diceRollText1 = document.getElementById("dice-roll1-amount");
 let diceRollText2 = document.getElementById("dice-roll2-amount");
 let diceRollTotal = document.getElementById("dice-roll-total");
-let diceButton = document.getElementById("dice-roll");
+let diceButton = document.getElementById("roll-button");
+
+
+
 
 
 
@@ -165,38 +155,35 @@ let diceButton = document.getElementById("dice-roll");
 // let bankText = document.getElementById("bank");
 // let notification = document.getElementById("notification");
 
-// // CLASS "TABLE AREA"
-// // fix this
-// // fix this
-// let passBetText = document.getElementById("pass-bet-amount");
-
-
-
-
-
-
-
-
-
-
 
 
 
 // Constants...
 let bank = 1000;
-let rollOutcome = 0;
+let rollOutcome = 0; // whatsa this??
+
 let comeOutRoll = 0;
 let pointRoll = 0;
 // let bigRed = 0; // probably need later on to 7 out
 // let establishedPointNumber = 0; // for point Roll
+
 // Bet Constants...
-// bet constant
-// let passBetAmount = 0;
-// win constants
-let passWinAmount = 0;
-// sums
-let totalBetAmount = 0;
-let totalWon = 0;
+let num4BetAmount = 0;
+let num5BetAmount = 0;
+let num6BetAmount = 0;
+let num7BetAmount = 0;
+let num8BetAmount = 0;
+let num9BetAmount = 0;
+let num10BetAmount = 0;
+let comeLineBetAmount = 0;
+let fieldLineBetAmount = 0;
+let passLineBetAmount = 0;
+let oddsLineBetAmount = 0;
+
+let totalBetAmount = num4BetAmount + num5BetAmount + num6BetAmount + num7BetAmount + num8BetAmount + 
+num9BetAmount + num10BetAmount + comeLineBetAmount + fieldLineBetAmount + passLineBetAmount + oddsLineBetAmount;
+
+// let totalWon
 
 
 
@@ -204,18 +191,9 @@ let totalWon = 0;
 
 
 // Functions...
-// init()
 
 
 
-// function betHowMuch(){ // Basic Pass Line Code - click on pass line html, run this function
-//     passBetAmount += 5; // increased bet by $5
-//     passBetText.innerText = passBetAmount; // change bet amount next to pass line bet
-//     bankText.innerText = bank - passBetAmount;
-//     // roll dice is disabled if you did not make a passBetAmount on the first come out roll
-//     if(comeOutRoll === 0 && passBetAmount > 0){
-//         diceButton.disabled = false;
-//     };
 
 
 function diceRoll(){
