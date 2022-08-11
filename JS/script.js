@@ -77,8 +77,11 @@ function drag(event, value) {
 function allowDrop(event) {
     event.preventDefault();
 };
+// drop function
+// some betting and dice roll functions are nested
 function drop(event) {
     event.preventDefault();
+    
     var chipValue = Number(event.dataTransfer.getData("number")); // create variable = value assigned to dragged chip
     var data = event.dataTransfer.getData("text");
     event.target.appendChild(document.getElementById(data).cloneNode(true)); // adds a clone of the chip to desired square
@@ -134,8 +137,9 @@ function drop(event) {
     //     console.log("pass bet is " + passBet);
     //     console.log("odds line is " + oddsBet);
     // };
-    // testBet(); 
+    // testBet();
 };
+
 
 // Dice Roll functions - game initializer
 function diceRoll(){
@@ -191,7 +195,7 @@ function calcComeWon(){
 
 function newRound(){
     // Removing Highlights
-    highlightSquare.setAttribute("class", "false");
+    highlightSquare.classList.remove("highlight")
 
     // Resetting Turn Values
     comeRoll = 0;
@@ -320,7 +324,7 @@ function reset(){
     pointRoll = 0;
 
     // Removing Highlights
-    highlightSquare.setAttribute("class", "false");
+    highlightSquare.classList.remove("highlight")
        
     // Resets Dice Display
     diceText1.innerText = " --"; // reset dice roll values to --
