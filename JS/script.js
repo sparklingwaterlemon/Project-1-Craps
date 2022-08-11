@@ -41,6 +41,21 @@ let pointWinNum;
 // DOM for pointWinNum
 let highlightSquare;
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // Bet Constants
 let bet4 = 0;
 let bet5 = 0;
@@ -64,6 +79,14 @@ let comeWin = 0;
 let fieldWin = 0;
 let passWin = 0;
 let oddsWin = 0;
+
+allSqWins = {
+    win4: 4,
+    win5: 5,
+    win6: 6,
+    win8: 8,
+    win10: 10
+};
 
 let totalWin = 0; // totalWin is wagered amount + winnings
 
@@ -156,16 +179,7 @@ function diceRoll(){
     // Determining Come Out and Point Roll
     if(comeRoll >= 1){
         pointRoll += 1;
-
-        // pointRollfunctions()
-        // START POINT ROLL
-        // pointRollResults();
-        // START POINT ROLL
-        // pointRollResults();
-        // START POINT ROLL
-        // pointRollResults();
-        // START POINT ROLL
-        // pointRollResults();
+        pointRollGamePlay(diceTotal);
     } else {
         comeRoll += 1;
         comeOutRollGamePlay(diceTotal); // determining results for Come Out Roll
@@ -174,6 +188,7 @@ function diceRoll(){
 
 function comeOutRollGamePlay(diceTotal){ 
     if(diceTotal === 7 || diceTotal === 11){
+        diceButton.disabled = true; // Disabling Roll Button
         calcComeWon();
         setTimeout(newRound, 2500); // new bank roll is displayed in newRound
     } else if(diceTotal === 2 || diceTotal === 3 || diceTotal === 12){
@@ -195,7 +210,7 @@ function calcComeWon(){
 
 function newRound(){
     // Removing Highlights
-    highlightSquare.classList.remove("highlight")
+    // highlightSquare.classList.remove("highlight")
 
     // Resetting Turn Values
     comeRoll = 0;
@@ -205,9 +220,6 @@ function newRound(){
     diceText1.innerText = " --";
     diceText2.innerText = " --";
     diceTotalText.innerText = "--";
-
-    // Disabling Roll Button
-    diceButton.disabled = true;
 
     // Resetting Status Bar
     bankAmtDisp.innerText = bank;
@@ -253,13 +265,99 @@ function initPointRoll(diceTotal){
     highlightSquare.setAttribute("class", "highlight"); // in which I can get the dom
     // to hightlight the point winning number
     pointWinNum = diceTotal; // setting the new point Winning Number
-   
-    console.log("work on Dice Roll Function part 2 - POINT ROLL :D");
+   notif.innerText = "New Winning Number - " + pointWinNum;
 };
 
 
 
+function pointRollGamePlay(diceTotal){
+    // lose point roll
+    if(diceTotal === 7){
+        diceButton.disabled = true;
+        highlightSquare.classList.remove("highlight");
+        notif.innerText = ("BIG RED. TABLE LOSES");
+        setTimeout(newRound, 2500);
+    } else if(diceTotal === pointWinNum){
+        calcPointWon(diceTotal); // Win Calculations...
+        
+        bank = bank + totalWin; // Updating my bank roll
+        notif.innerText = ("You won = " + totalWin); // Updating status bar
+    }
+};
 
+
+
+// function calcPointWon(diceTotal){
+//     // if you hit winning number... what happens
+//     // you win pass line, you win odds line, you win the square your numbers on
+//     // remaining chips are not removed/ remaining bets are not removed // endOfPointRound() Resetting..
+//     passWin = passBet + passBet // pass Win amount
+//     calcOddsWin();
+    
+//     allSqWins.forEach((element) => {
+//         var stringDiceNumber = diceTotal.toString();
+//         if(element === 
+
+//         }
+//     }
+
+
+
+
+        // function calculateWin(winningNumber){
+        //     passLineWin = passLineBet * 2;
+        //     oddsWin(winningNumber);
+        //     console.log("calc passlinewin -- " + passLineWin);
+        //     // calculatefieldswin();
+        
+            
+            
+            
+        //     if(winningNumber === 10){ //only one win square + passline&odds
+        //         num10win = Math.round(num10BetAmount + (num10BetAmount * 1.8));
+        //         console.log("calc num10win -- " + num10win);
+                
+        //     } if(winningNumber === 9){
+        //         num9win = Math.round(num9BetAmount + (num9BetAmount * 2.0));
+        //         num10BetAmount = 0; // NEED TO CLEAR BET AMOUNT
+        //     };
+        //     //calucalte totalWin
+        //     totalWin = passLineWin + num10win + num9win + oddsLineWin;
+        //     console.log("calc totalWin --- " + totalWin);
+            
+        //     //
+        //     // function clearsquare
+        // };
+        
+        // function oddsWin(winningNumber){
+        //         if(winningNumber === 10){
+        //             oddsLineWin = oddsLineBet * 3;
+        //             console.log("odds WIn -- " + oddsLineWin)
+        //         } else if(winningNumber === 9){
+        //             oddsLineWin = oddsLineBet * 2;
+        //         }
+        // };
+        
+        // console.log(totalWin);
+        
+        // NOTE NEED TO CLEAR BOARD OF chips on that SQUARE!!!
+        // clear individual square
+        // clear pass line
+        // clear odd line
+        //function clearchipsonwinningsquare(){
+        // var stringDiceNumber = diceTotal.toString();
+        // var box = `bet-` + stringDiceNumber;
+        // document.getElementById(box).replaceChildren();
+        
+        
+        // function fieldsbet(winningNumber){
+        // 		if(winningNum = 2){
+        // 			fieldswin = fieldsbet * blahb lah blha
+        // 		} else if (winning number == 3){
+        // 			blahblah blah
+        // 		}
+        // }
+            
 
 
 
@@ -324,7 +422,7 @@ function reset(){
     pointRoll = 0;
 
     // Removing Highlights
-    highlightSquare.classList.remove("highlight")
+    highlightSquare.classList.remove("highlight");
        
     // Resets Dice Display
     diceText1.innerText = " --"; // reset dice roll values to --
