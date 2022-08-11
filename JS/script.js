@@ -41,21 +41,6 @@ let pointWinNum;
 // DOM for pointWinNum
 let highlightSquare;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // Bet Constants
 let bet4 = 0;
 let bet5 = 0;
@@ -80,15 +65,8 @@ let fieldWin = 0;
 let passWin = 0;
 let oddsWin = 0;
 
-allSqWins = {
-    win4: 4,
-    win5: 5,
-    win6: 6,
-    win8: 8,
-    win10: 10
-};
 
-let totalWin = 0; // totalWin is wagered amount + winnings
+let totalWin = 0; // totalWin is wagering amount + winnings
 
 
 // Game Play Functions...
@@ -110,7 +88,7 @@ function drop(event) {
     event.target.appendChild(document.getElementById(data).cloneNode(true)); // adds a clone of the chip to desired square
     
     wagering = wagering + chipValue; // updating how much I'm wagering value
-    betAmtDisp.innerText = wagering; // updating status bar - wager display
+    betAmtDisp.innerText = wagering; // updating status bar - wagering display
     bank = bank - chipValue; // updating bank - once bet's are on board - taking out of pockets
     bankAmtDisp.innerText = bank; // updating status bar - bank display
 
@@ -190,11 +168,14 @@ function comeOutRollGamePlay(diceTotal){
     if(diceTotal === 7 || diceTotal === 11){
         diceButton.disabled = true; // Disabling Roll Button
         calcComeWon();
-        setTimeout(newRound, 2500); // new bank roll is displayed in newRound
+        setTimeout(newRound, 5000); // new bank roll is displayed in newRound
     } else if(diceTotal === 2 || diceTotal === 3 || diceTotal === 12){
+
         // no need to update bank - bet chips are already subtracted from bank roll
+        diceButton.disabled = true; // Disabling Roll Button
         notif.innerText = ("You lost Bet Amount = " + wagering);
-        setTimeout(newRound, 2500); // wager amount is cleared in newRound
+        setTimeout(newRound, 5000); // wagering amount is cleared in newRound
+
     } else {
         initPointRoll(diceTotal);
     }
@@ -204,6 +185,7 @@ function calcComeWon(){
     // Squares you can win on Come Roll: Pass Line
     passWin = passBet + passBet; // Payout Odds 1:1
     totalWin = passWin; 
+
     bank = bank + totalWin; // Updating my bank roll
     notif.innerText = ("You won = " + totalWin); // Updating status bar
 };
@@ -256,166 +238,191 @@ function newRound(){
 };
 
 function initPointRoll(diceTotal){
-    notif.innerText = ("Point Roll");
-
     // highlighting winningNum
     var stringDiceNumber = diceTotal.toString(); // taking dice total and turning to string 
     var box = `bet-` + stringDiceNumber; // to use as a variable
     highlightSquare = document.getElementById(box); // creating a dom variable that I can use later to un highlight
     highlightSquare.setAttribute("class", "highlight"); // in which I can get the dom
-    // to hightlight the point winning number
+    // highlighting winningNum
+    
     pointWinNum = diceTotal; // setting the new point Winning Number
-   notif.innerText = "New Winning Number - " + pointWinNum;
+    notif.innerText = "New Winning Number - " + pointWinNum;
 };
 
 
 
 function pointRollGamePlay(diceTotal){
-    // lose point roll
-    if(diceTotal === 7){
-        diceButton.disabled = true;
-        highlightSquare.classList.remove("highlight");
-        notif.innerText = ("BIG RED. TABLE LOSES");
-        setTimeout(newRound, 2500);
-    } else if(diceTotal === pointWinNum){
-        calcPointWon(diceTotal); // Win Calculations...
-        
-        bank = bank + totalWin; // Updating my bank roll
-        notif.innerText = ("You won = " + totalWin); // Updating status bar
+    if(diceTotal === 7){ // Craps Out! - You Lose!
+        diceButton.disabled = true; // disable roll button
+        highlightSquare.classList.remove("highlight"); // remove highlight
+        notif.innerText = ("BIG RED. TABLE LOSES"); // notif
+
+        setTimeout(newRound, 5000); // resets board - lose all bets
+    } else if(diceTotal === pointWinNum){ // You Win!
+        calcPointWon(diceTotal); // Win Calculations & Reset 
+    } else {
+        calcPointTie(diceTotal);
+    };
+};
+
+
+// Lines 268 - 365ish - game logic for Point Win
+function calcPointWon(diceTotal){
+    // Win on Pass Line, Odds Line, and Square Number
+    // Chips on other bets are not removed
+
+    calcPassWinPoint(diceTotal); // Calc Pass Win Point
+    calcOddsWin(diceTotal); // Calc Odds Win
+    calcSquareWin(diceTotal); // Calc Individual Square Win
+    calcFieldWin(diceTotal); // calc Field Win // subtracting wagering already
+
+    totalWin = win10 + win9 + win8 + win6 + win5 + win4 + passWin + oddsWin + fieldWin;
+
+
+    bank = bank + totalWin; // Updating Bank Roll
+    wagering = wagering - passBet - oddsBet; // Update Wagering
+
+    notif.innerText = ("You won = " + totalWin); // Updating Status Bar
+
+    setTimeout(pointWonReset, 5000);
+};
+function calcPassWinPoint(diceTotal){
+    if(diceTotal === 4 || diceTotal === 10){
+        passWin = Math.round(passBet + (passBet * 2));
+        console.log("Pass Win 4 & 10 at 2:1");
+    } else if(diceTotal === 5 || diceTotal === 9){
+        passWin = Math.round(passBet + (passBet * 1.5));
+        console.log("Pass Win 5 & 9 at 3:2");
+    } else if(diceTotal === 6 || diceTotal === 8){
+        passWin = Math.round(passBet + (passBet * 0.84));
+        console.log("Pass Win 6 & 8 at 5:6");
     }
 };
-
-
-
-// function calcPointWon(diceTotal){
-//     // if you hit winning number... what happens
-//     // you win pass line, you win odds line, you win the square your numbers on
-//     // remaining chips are not removed/ remaining bets are not removed // endOfPointRound() Resetting..
-//     passWin = passBet + passBet // pass Win amount
-//     calcOddsWin();
-    
-//     allSqWins.forEach((element) => {
-//         var stringDiceNumber = diceTotal.toString();
-//         if(element === 
-
-//         }
-//     }
-
-
-
-
-        // function calculateWin(winningNumber){
-        //     passLineWin = passLineBet * 2;
-        //     oddsWin(winningNumber);
-        //     console.log("calc passlinewin -- " + passLineWin);
-        //     // calculatefieldswin();
-        
-            
-            
-            
-        //     if(winningNumber === 10){ //only one win square + passline&odds
-        //         num10win = Math.round(num10BetAmount + (num10BetAmount * 1.8));
-        //         console.log("calc num10win -- " + num10win);
-                
-        //     } if(winningNumber === 9){
-        //         num9win = Math.round(num9BetAmount + (num9BetAmount * 2.0));
-        //         num10BetAmount = 0; // NEED TO CLEAR BET AMOUNT
-        //     };
-        //     //calucalte totalWin
-        //     totalWin = passLineWin + num10win + num9win + oddsLineWin;
-        //     console.log("calc totalWin --- " + totalWin);
-            
-        //     //
-        //     // function clearsquare
-        // };
-        
-        // function oddsWin(winningNumber){
-        //         if(winningNumber === 10){
-        //             oddsLineWin = oddsLineBet * 3;
-        //             console.log("odds WIn -- " + oddsLineWin)
-        //         } else if(winningNumber === 9){
-        //             oddsLineWin = oddsLineBet * 2;
-        //         }
-        // };
-        
-        // console.log(totalWin);
-        
-        // NOTE NEED TO CLEAR BOARD OF chips on that SQUARE!!!
-        // clear individual square
-        // clear pass line
-        // clear odd line
-        //function clearchipsonwinningsquare(){
-        // var stringDiceNumber = diceTotal.toString();
-        // var box = `bet-` + stringDiceNumber;
-        // document.getElementById(box).replaceChildren();
-        
-        
-        // function fieldsbet(winningNumber){
-        // 		if(winningNum = 2){
-        // 			fieldswin = fieldsbet * blahb lah blha
-        // 		} else if (winning number == 3){
-        // 			blahblah blah
-        // 		}
-        // }
-            
-
-
-
-
-
-// Use as basis for calculating Point Roll Calulations
-// Win function basics for Point Roll
-function calculateWin(){
-    win4 = Math.round(bet4 + (bet4 * 1.8)) // Payout Odds 9:5 - 1.8
-    win5 = Math.round(bet5 + (bet5 * 1.4)) // Payout Odds 7:5 - 1.4
-    win6 = Math.round(bet6 + (bet6 * 1.167)) // Payout Odds 7:6 - 1.167
-
-    win8 = Math.round(bet8 + (bet8 * 1.167)) // Payout Odds 7:6 - 1.167
-    win9 = Math.round(bet9 + (bet9 * 1.4)) // Payout Odds 7:5 - 1.4
-    win10 = Math.round(bet10 + (bet10 * 1.8)) // Payout Odds 9:5 - 1.8
-
-    passWin = passBet + passBet// Payout Odds 1:1 - 1.0
-    totalWin = win4 + win5 + win6 + win8 + win9 + win10 + passWin;
-
-
-//  add these to total win amount = + comeLineWin + fieldLineWin + oddLineWin
-
-
-// let fieldLineWin = 
-// fieldBet
-// if(winning number is 3,4,9,10, or 11)
-//     return (fieldBet +fieldBet);
-// if(winning number is 2)
-//     return fieldBet + fieldBet * 2
-// if winningnumber is 12
-//     retuen fieldBet + fieldBet * 3
-
-
-// Odds Line Bet
-// figure this shit out
-// let oddLineWin
-// let oddsBet =
-//  if winning number is 5 or 9
-//     let odds1 = take oddsBet + oddline* 1.5 //payout odds 3:2 - 1.5
-// if winning number is 6 or 8
-//     let odds1 = take oddline bet + oddline* 0.834 // payout odds 5:6  - .83
-// if winning number is 4 or 10
-//     return oddline +oddline *2 //payout 2:1 - 2.0
-
-// comeLineWin
-// let comeBet =
-// figure this shit out
-//  if winning number is 5 or 9
-//     return = take comesLineBetAmount + comesLineBetAmount * 1.5 //payout odds 3:2
-// if winning number is 6 or 9
-//     return odds1 = take comesline bet + comesline bet * 0.834 // payout odds 5:6
-// if winning number is 4 or 10
-//     return comesdline + comesdline * 2 //payout 2:1
-
+function calcOddsWin(diceTotal){ 
+    if(diceTotal === 4 || diceTotal === 10){
+        oddsWin = Math.round(oddsBet + (oddsBet * 2));
+        console.log("Odds Win 4 & 10 at 2:1");
+    } else if(diceTotal === 5 || diceTotal === 9){
+        oddsWin = Math.round(oddsBet + (oddsBet * 1.5));
+        console.log("Odds Win 5 & 9 at 3:2");
+    } else if(diceTotal === 6 || diceTotal === 8){
+        oddsWin = Math.round(oddsBet + (oddsBet * 0.84));
+        console.log("Odds Win 6 & 8 at 5:6");
+    } else {
+        console.log("Did not hit Odds");
+    }
 };
+function calcSquareWin(diceTotal){
+    if(diceTotal === 10){
+        win10 = Math.round(bet10 + (bet10 * 1.8));
+        wagering = wagering - bet10;
+        square10.replaceChildren("10");
+        console.log("dice 10 @ 9:5");
+
+    } else if(diceTotal === 9){
+        win9 = Math.round(bet9 + (bet9 * 1.4));
+        wagering = wagering - bet9;
+        square9.replaceChildren("9");
+        console.log("dice 9 @ 7:5");
+
+    } else if(diceTotal === 8){
+        win8 = Math.round(bet8 + (bet8 * 1.167));
+        wagering = wagering - bet8;
+        square8.replaceChildren("8");
+        console.log("dice 8 @ 7:6");
+
+    } else if(diceTotal === 6){
+        win6 = Math.round(bet6 + (bet6 * 1.167));
+        wagering = wagering - bet6;
+        square6.replaceChildren("6");
+        console.log("dice 6 @ 7:6");
+
+    } else if(diceTotal === 5){
+        win5 = Math.round(bet5 + (bet5 * 1.4));
+        wagering = wagering - bet5; 
+        square5.replaceChildren("5");
+        console.log("dice 5 @ 7:5");
+
+    } else if(diceTotal === 4){ 
+        win4 = Math.round(bet4 + (bet4 * 1.8));
+        wagering = wagering - bet4;
+        square4.replaceChildren("4");
+        console.log("dice 4 @ 9:5");
+    }
+};
+function pointWonReset(){
+    passSquare.replaceChildren("Pass Line");
+    passBet = 0;
+    passWin = 0;
+
+    oddsSquare.replaceChildren("Odds Line");
+    oddsBet = 0;
+    oddsWin = 0;
+
+    fieldSquare.replaceChildren("Field Line");
+    fieldBet = 0;
+    fieldWin = 0;
+
+    // Removing Highlights
+    highlightSquare.classList.remove("highlight");
+
+    // Resetting Turn Values
+    comeRoll = 0;
+    pointRoll = 0;
+
+    // Reseting Dice Display
+    diceText1.innerText = " --";
+    diceText2.innerText = " --";
+    diceTotalText.innerText = "--";
+
+    // Resetting Status Bar
+    bankAmtDisp.innerText = bank;
+    notif.innerText = "New Round";
+    betAmtDisp.innerText = wagering;
+};
+
+
+
+
+// Below - game logic for Point Tie
+function calcPointTie(diceTotal){
+    // you can only win individual squares and field bet
+    calcFieldWin(diceTotal);
+    calcSquareWin(diceTotal); // calc if I hit an individual square & replace children & subtract wagering
+    totalWin = win10 + win9 + win8 + win6 + win5 + win4 + fieldWin;
+    
+    bank = bank + totalWin; // Updating Bank Roll
+    wagering = wagering - fieldBet; // Update Wagering
+};
+
+function calcFieldWin(diceTotal){
+    if(diceTotal === 3 || diceTotal === 4 || diceTotal === 9 || diceTotal === 10 || diceTotal === 11){
+        fieldWin = Math.round(fieldBet + (fieldBet));
+        console.log("field 3, 4, 9, 10, 11 @ 1:1");
+    } else if(diceTotal === 2 || diceTotal === 12){
+        fieldWin = Math.round(fieldBet + (fieldBet * 2));
+        console.log("field 2, 12 @ 2:1");
+    };
+    if(fieldWin > 0){
+        notif.innerText = ("You won = " + fieldWin);
+    };
+    fieldSquare.replaceChildren("Field Line");
+    fieldBet = 0;
+};
+
+
+
+        
+        
+ 
+
+
+
+
 
 // RESET - clears chips from table
 // Do I want to reset Roll Value??
+
 function reset(){
     // Resets Roll Value
     comeRoll = 0;
@@ -468,4 +475,56 @@ function reset(){
     fieldBet = 0;
     passBet = 0;
     oddsBet = 0;
-}
+};
+
+function returnChips(){
+    // // Resets Roll Value
+    // comeRoll = 0;
+    // pointRoll = 0;
+
+    // // Removing Highlights
+    // highlightSquare.classList.remove("highlight");
+       
+    // // Resets Dice Display
+    // diceText1.innerText = " --"; // reset dice roll values to --
+    // diceText2.innerText = " --";
+    // diceTotalText.innerText = "--";
+
+    // // Disables Dice Roll
+    // diceButton.disabled = true;
+
+    // Resets Bank "Returns Chips"
+    bank = bank + wagering - passBet;
+
+    // Clears Chips "Returns Chips"
+    console.log("clear");
+    placeBetSquare.replaceChildren("Place Bets");
+    square4.replaceChildren("4");
+    square5.replaceChildren("5");
+    square6.replaceChildren("6");
+    square8.replaceChildren("8");
+    square9.replaceChildren("9");
+    square10.replaceChildren("10");
+    comeSquare.replaceChildren("Come Line");
+    fieldSquare.replaceChildren("Field Line");
+    oddsSquare.replaceChildren("Odds Line");
+    
+    // Resets Status Bar "Resets Bets"
+    bankAmtDisp.innerText = bank;
+    betAmtDisp.innerText = wagering - passBet;
+    // notif.innerText = "Notification";
+   
+    // Resets Wager
+    wagering = passBet;
+
+    // Resets Bets
+    bet4 = 0;
+    bet5 = 0;
+    bet6 = 0;
+    bet8 = 0;
+    bet9 = 0;
+    bet10 = 0;
+    comeBet = 0;
+    fieldBet = 0;
+    oddsBet = 0;
+};
