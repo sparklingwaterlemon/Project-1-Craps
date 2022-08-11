@@ -125,20 +125,20 @@ function drop(event) {
     letsDoMDMACanYouRoll();
 
 
-    // // if I want to see if my drag and drop function works correctly..
-    // function testBet(){
-    //     console.log("num 4 is " + bet4);
-    //     console.log("num 5 is " + bet5);
-    //     console.log("num 6 is " + bet6);
-    //     console.log("num 8 is " + bet8);
-    //     console.log("num 9 is " + bet9);
-    //     console.log("num 10 is " + bet10);
-    //     console.log("come line is " + comeBet);
-    //     console.log("field line is " + fieldBet);
-    //     console.log("pass bet is " + passBet);
-    //     console.log("odds line is " + oddsBet);
-    // };
-    // testBet();
+    // if I want to see if my drag and drop function works correctly..
+    function testBet(){
+        console.log("num 4 is " + bet4);
+        console.log("num 5 is " + bet5);
+        console.log("num 6 is " + bet6);
+        console.log("num 8 is " + bet8);
+        console.log("num 9 is " + bet9);
+        console.log("num 10 is " + bet10);
+        console.log("come line is " + comeBet);
+        console.log("field line is " + fieldBet);
+        console.log("pass bet is " + passBet);
+        console.log("odds line is " + oddsBet);
+    };
+    testBet();
 };
 
 
@@ -276,7 +276,7 @@ function calcPointWon(diceTotal){
     calcSquareWin(diceTotal); // Calc Individual Square Win
     calcFieldWin(diceTotal); // calc Field Win // subtracting wagering already
 
-    totalWin = win10 + win9 + win8 + win6 + win5 + win4 + passWin + oddsWin + fieldWin;
+    totalWin = totalWin + win10 + win9 + win8 + win6 + win5 + win4 + passWin + oddsWin + fieldWin;
 
 
     bank = bank + totalWin; // Updating Bank Roll
@@ -317,37 +317,32 @@ function calcSquareWin(diceTotal){
         win10 = Math.round(bet10 + (bet10 * 1.8));
         wagering = wagering - bet10;
         square10.replaceChildren("10");
-        console.log("dice 10 @ 9:5");
 
     } else if(diceTotal === 9){
         win9 = Math.round(bet9 + (bet9 * 1.4));
         wagering = wagering - bet9;
         square9.replaceChildren("9");
-        console.log("dice 9 @ 7:5");
 
     } else if(diceTotal === 8){
         win8 = Math.round(bet8 + (bet8 * 1.167));
         wagering = wagering - bet8;
         square8.replaceChildren("8");
-        console.log("dice 8 @ 7:6");
 
     } else if(diceTotal === 6){
         win6 = Math.round(bet6 + (bet6 * 1.167));
         wagering = wagering - bet6;
         square6.replaceChildren("6");
-        console.log("dice 6 @ 7:6");
 
     } else if(diceTotal === 5){
         win5 = Math.round(bet5 + (bet5 * 1.4));
         wagering = wagering - bet5; 
         square5.replaceChildren("5");
-        console.log("dice 5 @ 7:5");
 
     } else if(diceTotal === 4){ 
         win4 = Math.round(bet4 + (bet4 * 1.8));
         wagering = wagering - bet4;
         square4.replaceChildren("4");
-        console.log("dice 4 @ 9:5");
+
     }
 };
 function pointWonReset(){
@@ -388,11 +383,13 @@ function pointWonReset(){
 function calcPointTie(diceTotal){
     // you can only win individual squares and field bet
     calcFieldWin(diceTotal);
+
     calcSquareWin(diceTotal); // calc if I hit an individual square & replace children & subtract wagering
-    totalWin = win10 + win9 + win8 + win6 + win5 + win4 + fieldWin;
+    totalWin = totalWin + win10 + win9 + win8 + win6 + win5 + win4 + fieldWin;
     
     bank = bank + totalWin; // Updating Bank Roll
-    wagering = wagering - fieldBet; // Update Wagering
+    console.log(totalWin);
+
 };
 
 function calcFieldWin(diceTotal){
@@ -405,7 +402,9 @@ function calcFieldWin(diceTotal){
     };
     if(fieldWin > 0){
         notif.innerText = ("You won = " + fieldWin);
+        bank = bank + fieldWin;
     };
+    wagering = wagering - fieldBet;
     fieldSquare.replaceChildren("Field Line");
     fieldBet = 0;
 };
