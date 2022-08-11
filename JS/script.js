@@ -1,10 +1,10 @@
 // DOMs...
 // DOMs for DRAP and DROP - Reset Function
 const placeBets = document.getElementById("place-bets");
-const bet4 = document.getElementById("bet-4");
-const bet5 = document.getElementById("bet-5");
-const bet6 = document.getElementById("bet-6");
-const bet8 = document.getElementById("bet-8");
+const square4 = document.getElementById("bet-4");
+const square5 = document.getElementById("bet-5");
+const square6 = document.getElementById("bet-6");
+const square8 = document.getElementById("bet-8");
 const bet9 = document.getElementById("bet-9");
 const bet10 = document.getElementById("bet-10");
 const comeLine = document.getElementById("come-line");
@@ -101,11 +101,11 @@ function calculateWin(){
 // let oddLineWin
 // let oddsLineBetAmount =
 //  if winning number is 5 or 9
-//     let odds1 = take oddsLineBetAmount + oddline* 1.5 //payout odds 3:2
-// if winning number is 6 or 9
-//     let odds1 = take oddline bet + oddline* 0.834 // payout odds 5:6
+//     let odds1 = take oddsLineBetAmount + oddline* 1.5 //payout odds 3:2 - 1.5
+// if winning number is 6 or 8
+//     let odds1 = take oddline bet + oddline* 0.834 // payout odds 5:6  - .83
 // if winning number is 4 or 10
-//     return oddline +oddline *2 //payout 2:1
+//     return oddline +oddline *2 //payout 2:1 - 2.0
 
 // comeLineWin
 // let comeLineBetAmount =
@@ -202,9 +202,7 @@ function canYouRoll(){
     };
 };
 
-function testingRemovingAttributes(){
-    console.log(bet4.setAttribute("ondragover"));
-}
+
 
 // Initialized from html - onclick
 function diceRoll(){
@@ -224,6 +222,12 @@ function diceRoll(){
         pointRoll += 1;
         console.log("come out roll " + comeOutRoll);
         console.log("point roll " + pointRoll);
+        // START POINT ROLL
+        // pointRollResults();
+        // START POINT ROLL
+        // pointRollResults();
+        // START POINT ROLL
+        // pointRollResults();
         // START POINT ROLL
         // pointRollResults();
     } else {
@@ -253,8 +257,6 @@ function comeOutRollResults(diceTotal){
         initPointRoll(diceTotal);
     }
 }
-
-
 function initPointRoll(diceTotal){
     notification.innerText = ("Point Roll");
 
@@ -266,7 +268,7 @@ function initPointRoll(diceTotal){
     bigRed.push(7);
     console.log(bigRed);
     console.log(establishedPointNumber);
-    
+
     console.log("need to create Point Roll Function PsuedoCode");
 }
 
@@ -293,10 +295,10 @@ function newRound(){
         
     // clears table of chips
     placeBets.replaceChildren("Place Bets");
-    bet4.replaceChildren("4");
-    bet5.replaceChildren("5");
-    bet6.replaceChildren("6");
-    bet8.replaceChildren("8");
+    square4.replaceChildren("4");
+    square5.replaceChildren("5");
+    square6.replaceChildren("6");
+    square8.replaceChildren("8");
     bet9.replaceChildren("9");
     bet10.replaceChildren("10");
     comeLine.replaceChildren("Come Line");
@@ -347,10 +349,10 @@ function reset(){
     // clears table of chips
     console.log("clear");
     placeBets.replaceChildren("Place Bets");
-    bet4.replaceChildren("4");
-    bet5.replaceChildren("5");
-    bet6.replaceChildren("6");
-    bet8.replaceChildren("8");
+    square4.replaceChildren("4");
+    square5.replaceChildren("5");
+    square6.replaceChildren("6");
+    square8.replaceChildren("8");
     bet9.replaceChildren("9");
     bet10.replaceChildren("10");
     comeLine.replaceChildren("Come Line");
@@ -384,4 +386,9 @@ function reset(){
     diceRollTotalText.innerText = "--";
     // Disables Dice Roll unless there is a Pass Bet
     diceButton.disabled = true;
+}
+
+// TESTING REMOVING ATTRIBUTES
+function testingRemovingAttributes(){
+    console.log(square4.setAttribute("ondragover"));
 }
