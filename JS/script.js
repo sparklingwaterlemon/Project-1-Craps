@@ -37,8 +37,9 @@ let rollOutcome = 0; // whatsa this??
 // Constants - Roll Count
 let comeOutRoll = 0;
 let pointRoll = 0;
-// let bigRed = 0; // probably need later on to 7 out
-// let establishedPointNumber = 0; // for point Roll
+let establishedPointNumber = 0; // for point Roll
+let bigRed = []; // probably need later on to 7 out
+
 
 // Constants - Betting Constants
 let tableCurrentBetTotal = 0;
@@ -249,22 +250,25 @@ function comeOutRollResults(diceTotal){
         diceButton.disabled = true;
         setTimeout(newRound, 4000);
     } else {
-        console.log("need to create Point Roll Function PsuedoCode");
-        notification.innerText = ("Point Roll");
         initPointRoll(diceTotal);
     }
 }
 
 
 function initPointRoll(diceTotal){
+    notification.innerText = ("Point Roll");
+
     var stringDiceNumber = diceTotal.toString();
-    console.log(stringDiceNumber);
-    console.log(typeof stringDiceNumber);
+    var box = `bet-` + stringDiceNumber;
+    document.getElementById(box).setAttribute("id", "highlight");
 
-    var box = `bet` + stringDiceNumber
+    establishedPointNumber = diceTotal;
+    bigRed.push(7);
+    console.log(bigRed);
+    console.log(establishedPointNumber);
+    
+    console.log("need to create Point Roll Function PsuedoCode");
 }
-
-
 
 
 
