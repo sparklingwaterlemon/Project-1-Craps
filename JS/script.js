@@ -168,13 +168,13 @@ function comeOutRollGamePlay(diceTotal){
     if(diceTotal === 7 || diceTotal === 11){
         diceButton.disabled = true; // Disabling Roll Button
         calcComeWon();
-        setTimeout(newRound, 5000); // new bank roll is displayed in newRound
+        setTimeout(newRound, 2500); // new bank roll is displayed in newRound
     } else if(diceTotal === 2 || diceTotal === 3 || diceTotal === 12){
 
         // no need to update bank - bet chips are already subtracted from bank roll
         diceButton.disabled = true; // Disabling Roll Button
         notif.innerText = ("You lost Bet Amount = " + wagering);
-        setTimeout(newRound, 5000); // wagering amount is cleared in newRound
+        setTimeout(newRound, 2500); // wagering amount is cleared in newRound
 
     } else {
         initPointRoll(diceTotal);
@@ -257,7 +257,7 @@ function pointRollGamePlay(diceTotal){
         highlightSquare.classList.remove("highlight"); // remove highlight
         notif.innerText = ("BIG RED. TABLE LOSES"); // notif
 
-        setTimeout(newRound, 5000); // resets board - lose all bets
+        setTimeout(newRound, 2500); // resets board - lose all bets
     } else if(diceTotal === pointWinNum){ // You Win!
         calcPointWon(diceTotal); // Win Calculations & Reset 
 
@@ -267,7 +267,7 @@ function pointRollGamePlay(diceTotal){
 };
 
 
-// Lines 268 - 365ish - game logic for Point Win
+// Game logic for Point Win - Lines 268 - 380 ish
 function calcPointWon(diceTotal){
     // Win on Pass Line, Odds Line, and Square Number
     // Chips on other bets are not removed
@@ -285,7 +285,7 @@ function calcPointWon(diceTotal){
 
     notif.innerText = ("You won = " + totalWin); // Updating Status Bar
 
-    setTimeout(pointWonReset, 5000);
+    setTimeout(pointWonReset, 2500);
 };
 function calcPassWinPoint(diceTotal){
     if(diceTotal === 4 || diceTotal === 10){
@@ -379,8 +379,6 @@ function pointWonReset(){
 };
 
 
-
-
 // Below - game logic for Point Tie
 // you can only win individual squares and field bet
 function calcPointTie(diceTotal){
@@ -410,7 +408,6 @@ function calcPointTie(diceTotal){
         resetSquareWin(diceTotal);
     };
 };
-
 function calcFieldWin(diceTotal){ // calculates field win and subtracts wager
     if(diceTotal === 3 || diceTotal === 4 || diceTotal === 9 || diceTotal === 10 || diceTotal === 11){
         fieldWin = Math.round(fieldBet * 2);
@@ -457,7 +454,6 @@ function resetSquareWin(diceTotal){
 
 // RESET - clears chips from table
 // Do I want to reset Roll Value??
-
 function reset(){
     // Resets Roll Value
     comeRoll = 0;
