@@ -163,7 +163,6 @@ function diceRoll(){
         comeOutRollGamePlay(diceTotal); // determining results for Come Out Roll
     }
 };
-
 function comeOutRollGamePlay(diceTotal){ 
     if(diceTotal === 7 || diceTotal === 11){
         diceButton.disabled = true; // Disabling Roll Button
@@ -180,7 +179,6 @@ function comeOutRollGamePlay(diceTotal){
         initPointRoll(diceTotal);
     }
 };
-
 function calcComeWon(){
     // Squares you can win on Come Roll: Pass Line
     passWin = passBet + passBet; // Payout Odds 1:1
@@ -189,7 +187,6 @@ function calcComeWon(){
     bank = bank + totalWin; // Updating my bank roll
     notif.innerText = ("You won = " + totalWin); // Updating status bar
 };
-
 function newRound(){
     // Removing Highlights
     // highlightSquare.classList.remove("highlight")
@@ -236,7 +233,6 @@ function newRound(){
     passBet = 0;
     oddsBet = 0;
 };
-
 function initPointRoll(diceTotal){
     // highlighting winningNum
     var stringDiceNumber = diceTotal.toString(); // taking dice total and turning to string 
@@ -260,13 +256,10 @@ function pointRollGamePlay(diceTotal){
         setTimeout(newRound, 2500); // resets board - lose all bets
     } else if(diceTotal === pointWinNum){ // You Win!
         calcPointWon(diceTotal); // Win Calculations & Reset 
-
     } else {
         calcPointTie(diceTotal); // NEED TO FIX THIS
     };
 };
-
-
 // Game logic for Point Win - Lines 268 - 380 ish
 function calcPointWon(diceTotal){
     // Win on Pass Line, Odds Line, and Square Number
@@ -296,7 +289,6 @@ function calcPassWinPoint(diceTotal){
         passWin = Math.round(passBet + (passBet * 0.84));
     }
 };
-
 function calcOddsWin(diceTotal){ 
     if(diceTotal === 4 || diceTotal === 10){
         oddsWin = Math.round(oddsBet + (oddsBet * 2));
@@ -377,8 +369,6 @@ function pointWonReset(){
     notif.innerText = "New Round";
     betAmtDisp.innerText = wagering;
 };
-
-
 // Below - game logic for Point Tie
 // you can only win individual squares and field bet
 function calcPointTie(diceTotal){
@@ -426,18 +416,25 @@ function calcFieldWin(diceTotal){ // calculates field win and subtracts wager
 function resetSquareWin(diceTotal){
     if(diceTotal === 10){
         bet10 = 0;
+        win10 = 0;
     } else if(diceTotal === 9){
         bet9 = 0;
+        win9 = 0;
     } else if(diceTotal === 8){
         bet8 = 0;
+        win8 = 0;
     } else if(diceTotal === 6){
         bet6 = 0;
+        win6 = 0;
     } else if(diceTotal === 5){
         bet5 = 0;
+        win5 = 0;
     } else if(diceTotal === 4){
         bet4 = 0;
+        win4 = 0;
     } else if(diceTotal === 3){
         bet3 = 0;
+        win3 = 0;
     }
 };
 
