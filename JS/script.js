@@ -274,9 +274,9 @@ function calcPointWon(diceTotal){
 
     bank = bank + totalWin; // Updating Bank Roll
     wagering = wagering - passBet - oddsBet; // Update Wagering
-
-    notif.innerText = ("You won = " + totalWin); // Updating Status Bar
-
+    
+    diceButton.disabled = true;
+    notif.innerText = ("You won = " + totalWin); // Updating Status Bar 
     setTimeout(pointWonReset, 2500);
 };
 function calcPassWinPoint(diceTotal){
@@ -339,6 +339,9 @@ function calcSquareWin(diceTotal){
     }
 };
 function pointWonReset(){
+    // Disable Roll Button
+    diceButton.disabled = true;
+
     passSquare.replaceChildren("Pass Line");
     passBet = 0;
     passWin = 0;
