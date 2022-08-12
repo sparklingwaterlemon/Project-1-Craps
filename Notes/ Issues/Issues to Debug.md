@@ -1,3 +1,8 @@
+NEW ISSUE
+
+I just realized the Field Bet is a one time bet. Need to change it to a one time bet.
+
+--------------------------------------------------------------------------------------------------------------------------------------
 
 ISSUE 1
 
@@ -18,3 +23,4 @@ ISSUE 2
 
 The chips do not sit on top of text elements inside grid containers.
 - possible solution - make it an image (the numbers and bet area text) under the board with a clear board sitting on top
+
