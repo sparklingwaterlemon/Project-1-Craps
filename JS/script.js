@@ -11,7 +11,7 @@ const fieldSquare = document.getElementById("field-line");
 const passSquare = document.getElementById("pass-line");
 const oddsSquare = document.getElementById("odds-line");
 
-// DOMs for DICE BOX
+// DOMs for DICE BOX ... 
 const diceText1 = document.getElementById("dice-roll-1-amount");
 const diceText2 = document.getElementById("dice-roll-2-amount");
 const diceTotalText = document.getElementById("dice-roll-total");
@@ -93,7 +93,7 @@ function drop(event) {
 
     // Assinging chip value to the corresponding dropped square
     // using 'html ids'
-    if(event.target.id === "bet-4"){
+    if(event.target.id === "bet-4"){ // html ids - not doms - returns html value for event.target.id
         bet4 = bet4 + chipValue;
     } else if(event.target.id === "bet-5"){
         bet5 = bet5 + chipValue;
@@ -371,6 +371,9 @@ function pointWonReset(){
     notif.innerText = "New Round";
     betAmtDisp.innerText = wagering;
 };
+
+
+
 // Below - game logic for Point Tie
 // you can only win individual squares and field bet
 function calcPointTie(diceTotal){
@@ -439,15 +442,6 @@ function resetSquareWin(diceTotal){
         win3 = 0;
     }
 };
-
-
-
-
-        
-        
- 
-
-
 
 
 
