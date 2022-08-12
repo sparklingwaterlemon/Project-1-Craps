@@ -1,6 +1,5 @@
 // DOMs...
 // DOMs for DRAP and DROP - Reset Function - Squares
-const placeBetSquare = document.getElementById("place-bets");
 const square4 = document.getElementById("bet-4");
 const square5 = document.getElementById("bet-5");
 const square6 = document.getElementById("bet-6");
@@ -39,7 +38,7 @@ let wagering = 0;
 let pointWinNum;
 
 // DOM for pointWinNum
-let highlightSquare;
+let highlightSquare = document.querySelector("#place-drink");
 
 // Bet Constants
 let bet4 = 0;
@@ -208,7 +207,7 @@ function newRound(){
     // Clearing Chips
     // Can you replace with Pre Made DOMS?
     // like replaceChildren( b4 = document.querySelector("#b4") = html <div id="b4"><span ondropover=drop(event)"> Place Bets </span></div> = CSS #b4{ animation}
-    placeBetSquare.replaceChildren("Place Bets");
+
     square4.replaceChildren("4");
     square5.replaceChildren("5");
     square6.replaceChildren("6");
@@ -472,7 +471,6 @@ function reset(){
 
     // Clears Chips "Returns Chips"
     console.log("clear");
-    placeBetSquare.replaceChildren("Place Bets");
     square4.replaceChildren("4");
     square5.replaceChildren("5");
     square6.replaceChildren("6");
@@ -526,7 +524,6 @@ function returnChips(){
 
     // Clears Chips "Returns Chips"
     console.log("clear");
-    placeBetSquare.replaceChildren("Place Bets");
     square4.replaceChildren("4");
     square5.replaceChildren("5");
     square6.replaceChildren("6");

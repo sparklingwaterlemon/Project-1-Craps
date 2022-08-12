@@ -22,58 +22,40 @@
         <div class="grid-item-0" id="notification"> Win-Amount / Notification</div>
     </div>
 
+    <div class="float-container">
+        <!-- Rack Area / Grid Container 2 -->
+        <div class="grid-container-2 float-child" id="rack">
+            <div class="grid-item-2" id="chip-1" draggable="true" ondragstart="drag(event, 1)">1</div>
+            <div class="grid-item-2" id="chip-5" draggable="true" ondragstart="drag(event, 5)"> 5 </div>
+            <div class="grid-item-2" id="chip-25" draggable="true" ondragstart="drag(event, 25)"> 25 </div>
+            <div class="grid-item-2" id="chip-100" draggable="true" ondragstart="drag(event, 100)" > 100 </div>
+            <div class="grid-item-2" id="place-drink" draggable="true" ondragstart="drag(event)"> My Drink</div>
+        </div>
 
-    <!-- Table Area / Grid Container 1  -->
-    <!-- (CSS) To Fix - take table dimension from vegas craps game website -->
-    <div class="grid-container" id="table-area">
-        <!-- Puck Bar and Don't Come Bar are - not betting areas / not droppable area -->
-        <div class="grid-item" id="puck-bar">Puck</div>
-        <div class="grid-item" id="dont-come-bar"> Don't Come Bar </div>
-        <div class="grid-item" id="place-bets" ondrop="drop(event)" ondragover="allowDrop(event)">place bets</div>
-        
-        <!-- change div into a div? 
-        <div id="bet-4"><div class="grid-item" ondrop="drop(event)" ondragover="allowDrop(event)">Bet 4</div></div>
-        <div id="bet-5"><div class="grid-item" ondrop="drop(event)" ondragover="allowDrop(event)">Bet 5</div></div>
-        <div id="bet-6"><div class="grid-item" ondrop="drop(event)" ondragover="allowDrop(event)">Bet 6</div></div>
-        <div id="bet-8"><div class="grid-item" ondrop="drop(event)" ondragover="allowDrop(event)">Bet 8</div></div>
-        <div id="bet-9"><div class="grid-item" ondrop="drop(event)" ondragover="allowDrop(event)">Bet 9</div></div>
-        <div id="bet-10"><div class="grid-item" ondrop="drop(event)" ondragover="allowDrop(event)">Bet 10</div></div> -->
-
-        <!-- original? -->
-        <div id="bet-4" class="grid-item" ondrop="drop(event)" ondragover="allowDrop(event)">Bet 4</div>
-        <div id="bet-5" class="grid-item" ondrop="drop(event)" ondragover="allowDrop(event)">Bet 5</div>
-        <div id="bet-6" class="grid-item" ondrop="drop(event)" ondragover="allowDrop(event)">Bet 6</div>
-        <div id="bet-8" class="grid-item" ondrop="drop(event)" ondragover="allowDrop(event)">Bet 8</div>
-        <div id="bet-9" class="grid-item" ondrop="drop(event)" ondragover="allowDrop(event)">Bet 9</div>
-        <div id="bet-10" class="grid-item" ondrop="drop(event)" ondragover="allowDrop(event)">Bet 10</div>
-
-
-        <div class="grid-item" id="come-line" ondrop="drop(event)" ondragover="allowDrop(event)">Come Line</div>
-        <div class="grid-item" id="field-line" ondrop="drop(event)" ondragover="allowDrop(event)">Field Line</div>
-        <div class="grid-item" id="pass-line"  ondrop="drop(event)" ondragover="allowDrop(event)">Pass Line</div>
-        <div class="grid-item" id="odds-line"  ondrop="drop(event)" ondragover="allowDrop(event)">Odd Line</div>
-    </div>
-
-
-    <!-- Rack Area / Grid Container 2 -->
-    <!-- (CSS) To Fix - Left side of page. Standing in a Column. Left of Table Area. Float -->
-    <div class="grid-container-2" id="rack">
-        <div class="grid-item-2" id="chip-1" draggable="true" ondragstart="drag(event, 1)" value="1"> $1 </div>
-        <div class="grid-item-2" id="chip-5" draggable="true" ondragstart="drag(event, 5)" value="5"> $5 </div>
-        <div class="grid-item-2" id="chip-25" draggable="true" ondragstart="drag(event, 25)" value="25"> $25 </div>
-        <div class="grid-item-2" id="chip-100" draggable="true" ondragstart="drag(event, 100)" value="100"> $100 </div>
-        <div class="grid-item-2" id="place-drink" draggable="true" ondragstart="drag(event)"> My Beverage Place Holder</div>
-    </div>
+        <!-- Table Area / Grid Container 1  -->
+        <div class="grid-container float-child" id="table-area">
+            <div class="grid-item" id="puck-bar">Puck</div> <!-- not droppable areas -->
+            <div class="grid-item" id="dont-come-bar"> Don't Come Bar </div> <!-- not droppable areas -->
+            <!-- place bets is not ready -->
+            <!-- <div class="grid-item" id="place-bets" ondrop="drop(event)" ondragover="allowDrop(event)">place bets</div> -->
+            <div id="bet-4" class="grid-item" ondrop="drop(event)" ondragover="allowDrop(event)">Bet 4</div>
+            <div id="bet-5" class="grid-item" ondrop="drop(event)" ondragover="allowDrop(event)">Bet 5</div>
+            <div id="bet-6" class="grid-item" ondrop="drop(event)" ondragover="allowDrop(event)">Bet 6</div>
+            <div id="bet-8" class="grid-item" ondrop="drop(event)" ondragover="allowDrop(event)">Bet 8</div>
+            <div id="bet-9" class="grid-item" ondrop="drop(event)" ondragover="allowDrop(event)">Bet 9</div>
+            <div id="bet-10" class="grid-item" ondrop="drop(event)" ondragover="allowDrop(event)">Bet 10</div>
+            <div class="grid-item" id="come-line" ondrop="drop(event)" ondragover="allowDrop(event)">Come Line</div>
+            <div class="grid-item" id="field-line" ondrop="drop(event)" ondragover="allowDrop(event)">Field Line</div>
+            <div class="grid-item" id="pass-line"  ondrop="drop(event)" ondragover="allowDrop(event)">Pass Line</div>
+            <div class="grid-item" id="odds-line"  ondrop="drop(event)" ondragover="allowDrop(event)">Odd Line</div>
+        </div>
     
-
-    <!-- Dice Box / Grid Container 4 -->
-    <!-- (CSS) To Fix - Top Right of page. Right of Table Area. Above One Time bet area. Float. -->
-    <div class="grid-container-4" class="dice-box">
-        <div class="grid-item-4" id="dice-1">
-            <span id="dice-roll-1-amount"> Die 1 </span></div>
-        <div class="grid-item-4" id="dice-2">
-            <span id="dice-roll-2-amount"> Die 2 </span></div>
-        <button class="grid-item-4 dice-box" id = "roll-button" onclick="diceRoll()" disabled> ROLL DICE </button>
+        <!-- Dice Box / Grid Container 4 -->
+        <div class="grid-container-4 float-child" class="dice-box">
+            <div class="grid-item-4" id="dice-1"><span id="dice-roll-1-amount"> Die 1 </span></div>
+            <div class="grid-item-4" id="dice-2"><span id="dice-roll-2-amount"> Die 2 </span></div>
+            <button class="grid-item-4 dice-box" id = "roll-button" onclick="diceRoll()" disabled> ROLL DICE </button>
+        </div>
     </div>
     <div id="dice-roll-total"> -- </div>
 

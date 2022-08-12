@@ -1,3 +1,34 @@
+
+
+
+(1)
+
+** Optimize by having objects with all the key value properties need for game including win function
+** In addition, I can sort them by arrays like const allBets = [num4, num5, ...] to loop over an array saving a lot of script space
+** Possibly a class constructor
+
+example of class constructor //
+lass Car {
+  constructor(name, year) {
+    this.name = name;
+    this.year = year;
+
+  }
+  age() {
+    let date = new Date();
+    return date.getFullYear() - this.year;
+  }
+}
+
+
+let myCar = new Car("Ford", 2014);
+document.getElementById("demo").innerHTML =
+"My car is " + myCar.year + " years old.";
+
+
+
+example //
+
 const num4 = {
     bet: 0,
     win: 0,
@@ -46,6 +77,7 @@ const num10 = {
         num10.win = Math.round(num10.bet + (num10.bet * 1.8)) // Payout Odds 9:5 - 1.8
     }
 };   
+
 // Bet Constants
 let comeBet = 0;
 let fieldBet = 0;
